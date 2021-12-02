@@ -1,0 +1,7 @@
+hard issues:
+  - typo in ClrFunctionArguments: 'Number
+  - can do "{ X = Y }" in table initializers, restrict that syntax as its useless.
+  - could use better error reporting. "Unexpected error: This value is not a string." isnt really helpful
+
+qol:
+  - maybe allow multiple comma-separated initializers for single var statement?
