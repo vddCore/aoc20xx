@@ -1,0 +1,33 @@
+var h_pos = 0; var h_pos2 = 0;
+var depth = 0; var depth2 = 0;
+               var s_aim = 0;
+
+var cmds = {
+  "forward" => {
+    "p1" => fn(x) { h_pos += x; },
+    "p2" => fn(x) { h_pos2 += x; depth2 += s_aim * x; }
+  },
+  "down" => {
+    "p1" => fn(x) { depth += x; },
+    "p2" => fn(x) { s_aim += x; }
+  },
+  "up" => {
+    "p1" => fn(x) { depth -= x; },
+    "p2" => fn(x) { s_aim -= x; }
+  }
+};
+
+fn main(args) {
+  var input = fs.get_lines("./data");
+
+  each (var k, var v : input) {
+    if (!#v) skip;
+    v = str.spl(v, " ");
+
+    cmds[v[0]].p1(str.s2n(v[1]));
+    cmds[v[0]].p2(str.s2n(v[1]));
+  }
+
+  io.println("p1: " + @(h_pos * depth));
+  io.println("p2: " + @(h_pos2 * depth2));
+}

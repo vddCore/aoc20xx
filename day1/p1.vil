@@ -1,0 +1,18 @@
+fn main(args) {
+  var input = fs.get_lines("./data");
+
+  var prev = -1;
+  var incs = 0;
+
+  each (var i, var v : input) {
+    if (!#v) skip;
+    v = str.s2n(v);
+
+    if (i && v > prev)
+      incs++;
+
+    prev = v;
+  }
+
+  io.println(incs);
+}
