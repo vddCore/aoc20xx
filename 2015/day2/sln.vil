@@ -1,0 +1,37 @@
+fn main(args) {
+  var lines = fs.get_lines("./data");
+
+  var s2n = str.s2n;
+  var total_box = 0;
+
+  each (var _, var v : lines) {
+    if (!#v) skip;
+
+    var dims = str.spl(v, "x");
+
+    var l = s2n(dims[0]);
+    var w = s2n(dims[1]);
+    var h = s2n(dims[2]);
+
+    total_box += box(l, w, h);
+  }
+
+  io.println("area: " + @total_box + " sqft");
+}
+
+fn box(l, w, h) {
+  var sides = { l*w, w*h, h*l };
+  var slack = min(sides);
+
+  ret (2*sides[0] + 2*sides[1] + 2*sides[2]) + slack;
+}
+
+fn min(t) {
+  var min = t[0];
+
+  for (var i = 1; i < #t; i++)
+    if (min > t[i])
+      min = t[i];
+
+  ret min;
+}
