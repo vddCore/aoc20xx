@@ -1,0 +1,30 @@
+var map = {"0,0" => 1};
+
+var santa = { "x" => 0, "y" => 0 };
+var robot = { "x" => 0, "y" => 0 };
+
+fn main(args) {
+  var program = fs.get_lines("./data")[0];
+
+  for (var i = 0; i < #program; i++) {
+    move(
+      program[i],
+      i % 2 == 0 ? santa : robot
+    );
+  }
+
+  io.println(#map);
+}
+
+fn move(cmd, who) {
+  if (cmd == "^") who.y--;
+  elif (cmd =="v") who.y++;
+  elif (cmd == ">") who.x++;
+  elif (cmd == "<") who.x--;
+
+  var str = @who.x + "," + @who.y;
+
+  if(!(str in map)) {
+    map[str] = 1;
+  } else map[str]++;
+}

@@ -1,0 +1,31 @@
+fn main(args) {
+  if (!??crypto) {
+    io.println("no crypto, no mining, can't calculate md5.");
+    exit;
+  }
+
+  var key = "bgvyzdsv";
+  var p1, p2;
+
+  for (var i = 1; !p1; i++) {
+    var source = key + @i;
+    var md5 = crypto.md5(source);
+    var sub = str.sub(md5, 0, 5);
+
+    if (sub == "00000")
+      p1 = i;
+  }
+
+  for (var i = 1; !p2; i++) {
+    var source = key + @i;
+    var md5 = crypto.md5(source);
+    var sub = str.sub(md5, 0, 6);
+
+    if (sub == "000000")
+      p2 = i;
+  }
+
+  io.println("p1: " + @p1);
+  io.println("p2: " + @p2);
+}
+
