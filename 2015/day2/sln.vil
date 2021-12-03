@@ -1,7 +1,5 @@
 fn main(args) {
   var lines = fs.get_lines("./data");
-
-  var s2n = str.s2n;
   var total_box = 0;
 
   each (var _, var v : lines) {
@@ -9,9 +7,9 @@ fn main(args) {
 
     var dims = str.spl(v, "x");
 
-    var l = s2n(dims[0]);
-    var w = s2n(dims[1]);
-    var h = s2n(dims[2]);
+    var l = $dims[0];
+    var w = $dims[1];
+    var h = $dims[2];
 
     total_box += box(l, w, h);
   }

@@ -1,14 +1,13 @@
 fn main(args) {
-  var s2n = str.s2n;
   var input = fs.get_lines("./data");
 
   var prev = -1;
   var incs = 0;
 
   for (var i = 0; i < #input - 3; i++) {
-    var sum = s2n(input[i])
-            + s2n(input[i + 1])
-            + s2n(input[i + 2]);
+    var sum = $input[i]
+            + $input[i + 1]
+            + $input[i + 2];
 
     if (i && sum > prev)
       incs++;
@@ -16,5 +15,5 @@ fn main(args) {
     prev = sum;
   }
 
-  io.println(increases);
+  io.println(incs);
 }

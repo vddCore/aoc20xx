@@ -22,7 +22,7 @@ fn ratings(t, pos, mode) {
   each (var k, var v : t) {
     if (!#v) skip;
 
-    if (str.at(v, pos) == c)
+    if ($v[pos] == c)
       new_t[#new_t] = v;
   }
 
@@ -36,9 +36,11 @@ fn bit_crit(t, pos, mode) {
   each (var k, var v : t) {
     if (!#v) skip;
 
-    if(str.at(v, pos) == "1")
-      ones++;
-    else zeroes++;
+    var c = $v[pos];
+    {
+      ones += c;
+      zeroes += !c;
+    }
   }
 
   var res = ones >= zeroes;
@@ -46,14 +48,14 @@ fn bit_crit(t, pos, mode) {
   if (mode != "oxy")
     res = !res;
 
-  ret res ? "1" : "0";
+  ret res;
 }
 
 fn bin2num(line) {
   var num = 0;
 
   for (var i = 0; i < #line; i++)
-    num = (num << 1) | (str.at(line, i) == "1" & 1);
+    num = (num << 1) | ($line[i] & 1);
 
   ret num;
 }

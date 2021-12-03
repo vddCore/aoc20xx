@@ -6,12 +6,11 @@ fn main(args) {
 
   each (var i, var v : input) {
     if (!#v) skip;
-    v = str.s2n(v);
 
-    if (i && v > prev)
+    if (i && $v > prev)
       incs++;
 
-    prev = v;
+    prev = $v;
   }
 
   io.println(incs);

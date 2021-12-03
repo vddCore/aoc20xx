@@ -1,20 +1,15 @@
 var flr = 0;
 var ind = -1;
 
-var cmds = {
-  "(" => fn() { flr++; },
-  ")" => fn() { flr--; }
-};
-
 fn main(args) {
   var program = fs.get_lines("./data")[0];
 
   for (var i = 0; i < #program; i++) {
-    cmds[str.at(program, i)]();
+    flr += program[i] == "(" ? 1 : -1;
 
     if (flr < 0 && ind < 0)
       ind = i + 1;
   }
 
-  io.println("santa finishes at floor " + @flr + "and the first character leading to basement is at " + @ind);
+  io.println("santa finishes at floor " + @flr + " and the first character leading to basement is at " + @ind);
 }

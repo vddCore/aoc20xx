@@ -24,8 +24,8 @@ fn main(args) {
     if (!#v) skip;
     v = str.spl(v, " ");
 
-    cmds[v[0]].p1(str.s2n(v[1]));
-    cmds[v[0]].p2(str.s2n(v[1]));
+    cmds[v[0]].p1($v[1]);
+    cmds[v[0]].p2($v[1]);
   }
 
   io.println("p1: " + @(h_pos * depth));

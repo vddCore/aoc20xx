@@ -10,11 +10,13 @@ fn main(args) {
     var zeroes = 0;
 
     for (var j = 0; j < #lines; j++) {
-      if(!#lines[j]) skip;
+      if (!#lines[j]) skip;
 
-      if (str.at(lines[j], i) == "1")
-        ones++;
-      else zeroes++;
+      var c = $lines[j][i];
+      {
+        ones += c;
+        zeroes += !c;
+      }
     }
 
     if (ones > zeroes) {
@@ -33,7 +35,7 @@ fn bin2num(line) {
   var num = 0;
 
   for (var i = 0; i < #line; i++)
-    num = (num << 1) | (str.at(line, i) == "1" & 1);
+    num = (num << 1) | ($line[i] & 1);
 
   ret num;
 }
