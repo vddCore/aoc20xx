@@ -1,6 +1,6 @@
-var h_pos = 0; var h_pos2 = 0;
-var depth = 0; var depth2 = 0;
-               var s_aim = 0;
+var h_pos, h_pos2,
+    depth, depth2,
+           s_aim;
 
 var cmds = {
   "forward" => {
@@ -20,7 +20,7 @@ var cmds = {
 fn main(args) {
   var input = fs.get_lines("./data");
 
-  each (var k, var v : input) {
+  each (var v : input) {
     if (!#v) skip;
     v = str.spl(v, " ");
 

@@ -1,5 +1,4 @@
-var flr = 0;
-var ind = -1;
+var flr = 0, ind = -1;
 
 fn main(args) {
   var program = fs.get_lines("./data")[0];

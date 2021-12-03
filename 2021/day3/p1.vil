@@ -1,21 +1,18 @@
 import("../../lib/aoc.vil");
 
 fn main(args) {
-  var lines = fs.get_lines("./data");
-  var bits = #lines[0];
-
-  var gamma = "";
-  var epsilon = "";
+  var lines = fs.get_lines("./data"),
+      bits = #lines[0],
+      epsilon = "",
+      gamma = "";
 
   for (var i = 0; i < bits; i++) {
-    var ones = 0;
-    var zeroes = 0;
+    var ones, zeroes;
 
     for (var j = 0; j < #lines; j++) {
       if (!#lines[j]) skip;
 
-      var c = $lines[j][i];
-      {
+      var c = $lines[j][i]; {
         ones += c;
         zeroes += !c;
       }

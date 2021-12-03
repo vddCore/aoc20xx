@@ -17,11 +17,10 @@ fn main(args) {
 }
 
 fn ratings(t, pos, mode) {
-  var new_t = {};
+  var new_t = {},
+      c = bit_crit(t, pos, mode);
 
-  var c = bit_crit(t, pos, mode);
-
-  each (var k, var v : t) {
+  each (var v : t) {
     if (!#v) skip;
 
     if ($v[pos] == c)
@@ -35,7 +34,7 @@ fn bit_crit(t, pos, mode) {
   var ones = 0;
   var zeroes = 0;
 
-  each (var k, var v : t) {
+  each (var v : t) {
     if (!#v) skip;
 
     var c = $v[pos]; {

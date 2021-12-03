@@ -1,8 +1,7 @@
 fn main(args) {
-  var input = fs.get_lines("./data");
-
-  var prev = -1;
-  var incs = 0;
+  var incs,
+      prev = -1,
+      input = fs.get_lines("./data");
 
   for (var i = 0; i < #input - 3; i++) {
     var sum = $input[i]

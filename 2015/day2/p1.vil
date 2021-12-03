@@ -1,0 +1,26 @@
+import("../../lib/aoc.vil");
+
+fn main(args) {
+  var lines = fs.get_lines("./data"),
+      total_box;
+
+  each (var v : lines) {
+    if (!#v) skip;
+
+    var dims = str.spl(v, "x"),
+           l = $dims[0],
+           w = $dims[1],
+           h = $dims[2];
+
+    total_box += box(l, w, h);
+  }
+
+  io.println("area: " + @total_box + " sqft");
+}
+
+fn box(l, w, h) {
+  var sides = { l*w, w*h, h*l },
+      slack = aoc.min(sides);
+
+  ret (2*sides[0] + 2*sides[1] + 2*sides[2]) + slack;
+}
