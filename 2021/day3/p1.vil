@@ -1,3 +1,5 @@
+import("../../common.vil");
+
 fn main(args) {
   var lines = fs.get_lines("./data");
   var bits = #lines[0];
@@ -28,14 +30,7 @@ fn main(args) {
     }
   }
 
-  io.println(bin2num(gamma) * bin2num(epsilon));
-}
-
-fn bin2num(line) {
-  var num = 0;
-
-  for (var i = 0; i < #line; i++)
-    num = (num << 1) | ($line[i] & 1);
-
-  ret num;
+  io.println(
+    aoc.bin2num(gamma) * aoc.bin2num(epsilon)
+  );
 }

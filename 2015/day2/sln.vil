@@ -1,3 +1,5 @@
+import("../../common.vil");
+
 fn main(args) {
   var lines = fs.get_lines("./data");
   var total_box = 0;
@@ -19,17 +21,7 @@ fn main(args) {
 
 fn box(l, w, h) {
   var sides = { l*w, w*h, h*l };
-  var slack = min(sides);
+  var slack = aoc.min(sides);
 
   ret (2*sides[0] + 2*sides[1] + 2*sides[2]) + slack;
-}
-
-fn min(t) {
-  var min = t[0];
-
-  for (var i = 1; i < #t; i++)
-    if (min > t[i])
-      min = t[i];
-
-  ret min;
 }

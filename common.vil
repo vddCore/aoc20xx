@@ -1,0 +1,25 @@
+if (!??aoc) setglobal("aoc", {});
+
+aoc.bin2num = fn(str) {
+  var num = 0;
+
+  for (var i = 0; i < #str; i++)
+    num = (num << 1) | ($str[i] & 1);
+
+  ret num;
+};
+
+aoc.min = fn(t) {
+  var min = t[0];
+
+  for (var i = 1; i < #t; i++)
+    if (min > t[i])
+      min = t[i];
+
+  ret min;
+};
+
+aoc.numconv = fn(t) {
+  each (var k, var v : t)
+    t[k] = $t[k];
+};
