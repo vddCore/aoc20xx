@@ -18,8 +18,3 @@ aoc.min = fn(t) {
 
   ret min;
 };
-
-aoc.numconv = fn(t) {
-  each (var k, var v : t)
-    t[k] = $t[k];
-};

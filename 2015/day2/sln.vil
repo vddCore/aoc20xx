@@ -1,4 +1,4 @@
-import("../../common.vil");
+import("../../lib/aoc.vil");
 
 fn main(args) {
   var lines = fs.get_lines("./data");
