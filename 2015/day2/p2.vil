@@ -12,16 +12,11 @@ fn main(args) {
         w = $dims[1],
         h = $dims[2];
 
-    total += l * w * h;
+    var bow = l * w * h;
+    var wrap = 2 * aoc.min({l+w,w+h,h+l});
+
+    total += bow + wrap;
   }
 
-  io.println(total);
-}
-
-fn two_smallest(t) {
-  var a, b;
-
-  for (var i = 0; i < #t; i++) {
-
-  }
+    io.println(total);
 }

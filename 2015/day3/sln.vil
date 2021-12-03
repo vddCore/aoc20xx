@@ -1,0 +1,25 @@
+var map = {};
+var x, y;
+
+fn main(args) {
+  var program = fs.get_lines("./data")[0];
+
+  for (var i = 0; i < #program; i++) {
+    move(program[i]);
+  }
+
+  io.println(#map);
+}
+
+fn move(cmd) {
+  if (cmd == "v") y--;
+  elif (cmd == "^") y++;
+  elif (cmd == ">") x++;
+  elif (cmd == "<") x--;
+
+  var str = @x + "," + @y;
+
+  if(!(str in map))
+    map[str] = 1;
+  else map[str]++;
+}
