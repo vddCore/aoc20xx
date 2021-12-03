@@ -1,0 +1,59 @@
+fn main(args) {
+  var lines = fs.get_lines("./data");
+  var bits = #lines[0];
+
+  var oxy = ratings(lines, 0, "oxy");
+  var co2 = ratings(lines, 0, "co2");
+
+  for (var i = 1; i < bits && #oxy != 1; i++)
+    oxy = ratings(oxy, i, "oxy");
+
+  for (var i = 1; i < bits && #co2 != 1; i++)
+    co2 = ratings(co2, i, "co2");
+
+  io.println(bin2num(oxy[0]) * bin2num(co2[0]));
+}
+
+fn ratings(t, pos, mode) {
+  var new_t = { };
+
+  var c = bit_crit(t, pos, mode);
+
+  each (var k, var v : t) {
+    if (!#v) skip;
+
+    if (str.at(v, pos) == c)
+      new_t[#new_t] = v;
+  }
+
+  ret new_t;
+}
+
+fn bit_crit(t, pos, mode) {
+  var ones = 0;
+  var zeroes = 0;
+
+  each (var k, var v : t) {
+    if (!#v) skip;
+
+    if(str.at(v, pos) == "1")
+      ones++;
+    else zeroes++;
+  }
+
+  var res = ones >= zeroes;
+
+  if (mode != "oxy")
+    res = !res;
+
+  ret res ? "1" : "0";
+}
+
+fn bin2num(line) {
+  var num = 0;
+
+  for (var i = 0; i < #line; i++)
+    num = (num << 1) | (str.at(line, i) == "1" & 1);
+
+  ret num;
+}

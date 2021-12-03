@@ -1,0 +1,39 @@
+fn main(args) {
+  var lines = fs.get_lines("./data");
+  var bits = #lines[0];
+
+  var gamma = "";
+  var epsilon = "";
+
+  for (var i = 0; i < bits; i++) {
+    var ones = 0;
+    var zeroes = 0;
+
+    for (var j = 0; j < #lines; j++) {
+      if(!#lines[j]) skip;
+
+      if (str.at(lines[j], i) == "1")
+        ones++;
+      else zeroes++;
+    }
+
+    if (ones > zeroes) {
+      gamma += "1";
+      epsilon += "0";
+    } elif (zeroes > ones) {
+      gamma += "0";
+      epsilon += "1";
+    }
+  }
+
+  io.println(bin2num(gamma) * bin2num(epsilon));
+}
+
+fn bin2num(line) {
+  var num = 0;
+
+  for (var i = 0; i < #line; i++)
+    num = (num << 1) | (str.at(line, i) == "1" & 1);
+
+  ret num;
+}
