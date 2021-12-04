@@ -18,3 +18,35 @@ aoc.min = fn(t) {
 
   ret min;
 };
+
+aoc.bingo = {
+  "print_board" => fn(board, mode) {
+    var x;
+
+    if (mode == "numbers") {
+      each (var k, _ : board.numbers) {
+        if (x && x % MAX_WIDTH == 0)
+          io.println();
+
+        if (#@k == 1)
+          k = "0" + @k;
+
+        io.print(@k + " ");
+        x++;
+      }
+    } elif (mode == "marks") {
+      each (var k, v : board.numbers) {
+        if (x && x % MAX_WIDTH == 0)
+          io.println();
+
+        io.print(v ? "X " : "  ");
+        x++;
+      }
+    } else {
+      io.println("unknown printmode");
+      exit;
+    }
+
+    io.println("\n\n");
+  }
+};

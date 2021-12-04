@@ -21,16 +21,15 @@ fn is_nice(str) {
 fn has_three_vowels(str) {
   var vowel_cnt = 0;
 
-  for (var i = 0; i < #str; i++) {
+  for (var i = 0; i < #str; i++)
     vowel_cnt += (str[i] in vowels);
-  }
 
   ret vowel_cnt >= 3;
 }
 
 fn has_at_least_one_dupe(str) {
   for (var i = 1; i < #str; i++) {
-    if(str[i - 1] == str[i])
+    if (str[i - 1] == str[i])
       ret true;
   }
 }

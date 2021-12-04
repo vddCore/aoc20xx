@@ -1,0 +1,106 @@
+import("../../lib/aoc.vil");
+
+var MAX_WIDTH = 5;
+var MAX_HEIGHT = 5;
+
+var boards = {};
+var winners = {};
+
+fn main(args) {
+  var data = fs.get_lines("./data"),
+      numbers = str.spl(data[0], ",");
+
+  for (var i = 2; i < #data; i += 6) {
+    boards[#boards] = load_board(data, i);
+  }
+
+  for (var i = 0; i < #numbers; i++) {
+    call(numbers[i]);
+  }
+
+  var first = boards[winners[0]];
+  var last = boards[winners[#winners - 1]];
+
+  io.println("first winner's score: " + @first.score);
+  io.println("last winner's score: " + @last.score);
+}
+
+fn load_board(data, start) {
+  var board = {
+    "numbers" => {},
+    "won" => false
+  };
+
+  for (var i = 0; i < MAX_HEIGHT; i++) {
+    var text = data[start + i];
+    var row = str.spl(text, " ");
+
+    for (var x = 0; x < #row; x++) {
+      if (!#row[x]) skip;
+      board.numbers[row[x]] = false;
+    }
+  }
+
+  ret board;
+}
+
+fn call(n) {
+  for (var j = 0; j < #boards; j++) {
+    var b = boards[j];
+    if (b.won) skip;
+
+    mark(b, n);
+    check_winner(b, n, j);
+  }
+}
+
+fn mark(board, n) {
+  if (!(n in board.numbers))
+    ret;
+
+  board.numbers[n] = true;
+}
+
+fn check_winner(board, number, j) {
+  var x, y;
+  var indexed = {};
+
+  each (var v : board.numbers) {
+    indexed[#indexed] = v;
+  }
+
+  for (var x = 0; x < MAX_WIDTH; x++) {
+    if (indexed[0 * MAX_WIDTH + x]
+     && indexed[1 * MAX_WIDTH + x]
+     && indexed[2 * MAX_WIDTH + x]
+     && indexed[3 * MAX_WIDTH + x]
+     && indexed[4 * MAX_WIDTH + x]) {
+      calc_result(board, number, j);
+      ret;
+    }
+  }
+
+  for (var y = 0; y < MAX_HEIGHT; y++) {
+    if (indexed[y * MAX_WIDTH + 0]
+     && indexed[y * MAX_WIDTH + 1]
+     && indexed[y * MAX_WIDTH + 2]
+     && indexed[y * MAX_WIDTH + 3]
+     && indexed[y * MAX_WIDTH + 4]) {
+      calc_result(board, number, j);
+      ret;
+    }
+  }
+}
+
+fn calc_result(board, number, j) {
+  var sum = 0;
+
+  each (var k, v : board.numbers) {
+    if (!v) sum += $k;
+  }
+
+  b.won = true;
+  b.score = sum * $number;
+
+  winners[#winners] = j;
+}
