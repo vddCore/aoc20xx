@@ -32,7 +32,7 @@ fn trace(map, line) {
     mark(map, x1, y1);
 
     if (x1 == x2 && y1 == y2)
-      break;
+      ret;
 
     if (2 * e <= dx) {
       e += dx;
