@@ -1,0 +1,48 @@
+fn main(args) {
+  var lines = fs.get_lines("./data");
+
+  var nice = 0;
+  each (var l : lines) {
+    if (!#l) skip;
+    nice += is_nice(l);
+  }
+
+  io.println(nice);
+}
+
+fn is_nice(str) {
+  ret rule_1(str)
+   && rule_2(str);
+}
+
+fn rule_1(s) {
+  for (var i = 0; i < #s; i++) {
+    if (i + 1 >= #s)
+      break;
+
+    var seg = str.sub(s, i, 2);
+
+    for (var j = i + 2; j < #s; j++) {
+      if (j == i)
+        skip;
+
+      if (j + 1 >= #s)
+        break;
+
+      var seg2 = str.sub(s, j, 2);
+
+      if (seg == seg2)
+        ret true;
+    }
+  }
+}
+
+fn rule_2(s) {
+  for (var i = 1; i < #s; i++) {
+    if (i + 1 >= #s)
+      break;
+
+    if (s[i - 1] == s[i + 1])
+      ret true;
+  }
+}
