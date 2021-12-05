@@ -99,8 +99,8 @@ fn calc_result(board, number, j) {
     if (!v) sum += $k;
   }
 
-  b.won = true;
-  b.score = sum * $number;
+  board.won = true;
+  board.score = sum * $number;
 
   winners[#winners] = j;
 }
