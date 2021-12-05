@@ -1,0 +1,44 @@
+import("./common.vil");
+
+fn main(args) {
+  var lines = fs.get_lines("./data"),
+      map = {},
+      cnt = 0;
+
+  lines = parse_lines(lines);
+
+  each (var l : lines) {
+    if (l.x1 == l.x2 || l.y1 == l.y2) {
+      trace(map, l);
+    }
+  }
+
+  each (var _, v : map)
+    cnt += v > 1;
+
+  io.println(cnt);
+}
+
+fn trace(map, line) {
+  swap(line);
+
+  for (var x = line.x1; x <= line.x2; x++) {
+    for (var y = line.y1; y <= line.y2; y++) {
+      mark(map, x, y);
+    }
+  }
+}
+
+fn swap(line) {
+  if (line.x2 - line.x1 < 0) {
+    var tmp = line.x1;
+    line.x1 = line.x2;
+    line.x2 = tmp;
+  }
+
+  if (line.y2 - line.y1 < 0) {
+    var tmp = line.y1;
+    line.y1 = line.y2;
+    line.y2 = tmp;
+  }
+}

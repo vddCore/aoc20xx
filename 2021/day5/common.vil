@@ -1,0 +1,77 @@
+fn parse_lines(lines) {
+  var r = {};
+
+  each (var s : lines) {
+    if (!#s) skip;
+    r[#r] = parse_line(s);
+  }
+
+    ret r;
+}
+
+fn parse_line(s) {
+  var line = str.spl(s, " -> ");
+  var from_s = str.spl(line[0], ",");
+  var to_s = str.spl(line[1], ",");
+
+  ret {
+    "x1" => $from_s[0],
+    "y1" => $from_s[1],
+    "x2" => $to_s[0],
+    "y2" => $to_s[1]
+  };
+}
+
+fn extremes(lines) {
+  var points = {
+    "min" => { "x" => 999999, "y" => 999999 },
+    "max" => { "x" => 0, "y" => 0 }
+  };
+
+  each (var l : lines) {
+    if (l.x1 < points.min.x)
+      points.min.x = l.x1;
+    elif (l.x1 > points.max.x)
+    points.max.x = l.x1;
+
+    if (l.y1 < points.min.y)
+      points.min.y = l.y1;
+    elif (l.y1 > points.max.y)
+    points.max.y = l.y1;
+
+    if (l.x2 < points.min.x)
+      points.min.x = l.x2;
+    elif (l.x2 > points.max.x)
+    points.max.x = l.x2;
+
+    if (l.y2 < points.min.y)
+      points.min.y = l.y2;
+    elif (l.y2 > points.max.y)
+    points.max.y = l.y2;
+  }
+
+  ret points;
+}
+
+fn print_map(map, xtr) {
+  for (var y = xtr.min.y; y <= xtr.max.y; y++) {
+    for (var x = xtr.min.x; x <= xtr.max.x; x++) {
+      var c = map[@x+","+@y];
+
+      if (!c)
+        io.print(".");
+      else io.print(@c);
+    }
+
+    io.println();
+  }
+}
+
+fn mark(map, x, y) {
+  var c = @x+","+@y;
+
+  if (!(c in map))
+    map[c] = 0;
+
+  map[c]++;
+}
