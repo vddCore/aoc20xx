@@ -1,0 +1,31 @@
+var fishies = { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    cnt = 0;
+
+fn main(args) {
+  var strings = str.spl(
+    fs.get_lines("./data")[0], ",", "tr"
+  );
+
+  each (var s : strings)
+    fishies[$s]++;
+
+  tick(256);
+
+  each (var f : fishies)
+    cnt += f;
+
+  io.println(cnt);
+}
+
+fn tick(d) {
+  while (d--) {
+    var f = fishies[0];
+
+    fishies[0] = fishies[1]; fishies[1] = fishies[2];
+    fishies[2] = fishies[3]; fishies[3] = fishies[4];
+    fishies[4] = fishies[5]; fishies[5] = fishies[6];
+    fishies[6] = fishies[7] + f;
+    fishies[7] = fishies[8];
+    fishies[8] = f;
+  }
+}

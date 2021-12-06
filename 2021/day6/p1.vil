@@ -1,0 +1,29 @@
+var MAX_TICKS = 80;
+var fishies = {};
+
+fn main(args) {
+  var strings = str.spl(fs.get_lines("./data")[0], ",", "tr");
+
+  each (var s : strings) {
+    fishies[#fishies] = $s;
+  }
+
+  for (var i = 0; i < MAX_TICKS; i++) {
+    tick();
+  }
+
+  io.println(#fishies);
+}
+
+fn tick() {
+  var count = #fishies;
+
+  for (var i = 0; i < count; i++) {
+    if (!fishies[i]) {
+      fishies[#fishies] = 8;
+      fishies[i] = 6;
+    } else {
+      fishies[i]--;
+    }
+  }
+}
