@@ -1,0 +1,37 @@
+import("../../lib/aoc.vil");
+
+fn main(args) {
+  var data = str.spl(fs.get_lines("./data")[0], ",", "tr");
+
+  each (var k, v : data) {
+    data[k] = $v;
+  }
+
+  var c = costs(data);
+
+  io.println(c[0]);
+  io.println(c[1]);
+}
+
+fn costs(t) {
+  var r = {{}, {}};
+
+  for (var i = 0; i < #t; i++) {
+    var a = $t[i], cost, cost2;
+
+    for (var j = 0; j < #t; j++) {
+      var c = math.abs(t[i] - t[j]);
+
+      cost += c;
+      cost2 += (c * (c + 1)) / 2;
+    }
+
+    r[0][#r[0]] = cost;
+    r[1][#r[1]] = cost2;
+  }
+
+  r[0] = aoc.min(r[0]);
+  r[1] = aoc.min(r[1]);
+
+  ret r;
+}

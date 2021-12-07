@@ -19,6 +19,25 @@ aoc.min = fn(t) {
   ret min;
 };
 
+aoc.max = fn(t) {
+  var max = t[0];
+
+  for (var i = 1; i < #t; i++)
+    if (max < t[i])
+      max = $t[i];
+
+  ret max;
+};
+
+aoc.avg = fn(t) {
+  var s;
+
+  each (var v : t)
+    s += v;
+
+  ret s / #t;
+};
+
 aoc.bingo = {
   "print_board" => fn(board, mode) {
     var x;
